@@ -9,12 +9,14 @@ import { CommonModule } from '@angular/common'
 import {
 	ControlValueAccessor,
 	FormControl,
+	FormGroup,
 	NG_VALUE_ACCESSOR,
 	ReactiveFormsModule
 } from '@angular/forms'
 import { TtInputComponent } from '../tt-input/tt-input.component'
 import { DadataService } from '../../data/services/dadata.service'
 import { debounceTime, switchMap, tap } from 'rxjs'
+import { DadataSuggestion } from '../../data/interfaces/dadata.interface'
 
 @Component({
 	selector: 'tt-address-input',
@@ -36,6 +38,12 @@ export class AddressInputComponent implements ControlValueAccessor {
 	#dadataService = inject(DadataService)
 
 	isDropdownOpened = signal<boolean>(true)
+
+	addressForm = new FormGroup({
+		city: new FormControl(''),
+		street: new FormControl(''),
+		building: new FormControl('')
+	})
 
 	suggestions$ = this.innerSearchControl.valueChanges.pipe(
 		debounceTime(500),
@@ -66,11 +74,17 @@ export class AddressInputComponent implements ControlValueAccessor {
 	onChange(value: any): void {}
 	onTouched() {}
 
-	onSuggestionPick(city: string) {
+	onSuggestionPick(suggest: DadataSuggestion) {
 		this.isDropdownOpened.set(false)
-		this.innerSearchControl.patchValue(city, {
-			emitEvent: false
+		// this.innerSearchControl.patchValue(city, {
+		// 	emitEvent: false
+		// })
+		// this.onChange(city)
+
+		this.addressForm.patchValue({
+			city: suggest.data.city,
+			street: suggest.data.street,
+			building: suggest.data.house
 		})
-		this.onChange(city)
 	}
 }

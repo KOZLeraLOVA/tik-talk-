@@ -8,9 +8,16 @@
 
         @for (suggest of suggestions; track suggest) {
             <button class="suggest-btn"
-            (click)="onSuggestionPick(suggest)">{{ suggest}}</button>
+                    (click)="onSuggestionPick(suggest)">{{ suggest.data.city}} {{ suggest.data.street}} {{ suggest.data.house}}</button>
+<!--            (click)="onSuggestionPick(suggest)">{{ suggest.data.city}}</button>-->
+
         }
 
 </div>
     }
 }
+<div [formGroup]="addressForm">
+<app-tt-input formControlName="city">Город</app-tt-input>
+<app-tt-input formControlName="street">Улица</app-tt-input>
+<app-tt-input formControlName="building">Дом</app-tt-input>
+</div>
