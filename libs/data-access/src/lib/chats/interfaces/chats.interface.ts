@@ -23,7 +23,7 @@ export interface Message {
 export interface LastMessageRes {
 	id: number
 	userFrom: Profile
-	message: string | null
+	message: Message
 	createdAt: string
-	unreadMessages: number
+	unreadMessages?: number
 }

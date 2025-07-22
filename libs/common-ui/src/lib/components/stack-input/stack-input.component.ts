@@ -1,4 +1,10 @@
-import { Component, forwardRef, HostListener, signal } from '@angular/core'
+import {
+	ChangeDetectionStrategy,
+	Component,
+	forwardRef,
+	HostListener,
+	signal
+} from '@angular/core'
 import { CommonModule, AsyncPipe } from '@angular/common'
 import { SvgIconComponent } from '../svg-icon/svg-icon.component'
 import {
@@ -13,6 +19,7 @@ import { BehaviorSubject } from 'rxjs'
 	imports: [CommonModule, SvgIconComponent, FormsModule, AsyncPipe],
 	templateUrl: './stack-input.component.html',
 	styleUrl: './stack-input.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush,
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,

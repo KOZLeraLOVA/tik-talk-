@@ -9,9 +9,16 @@
 
 <div class="last-message__wrapper">
     <div class="chat-user medium-text">{{ chat.userFrom.firstName}} {{chat.userFrom.lastName }}
-    <div class="chat-date">{{ getFormatDate(chat.createdAt, 'ru') }}</div>
-    </div>
-  <div class="medium-text">{{ chat.message ?? '...'}}</div>
+    <div class="chat-date">{{ getFormatDate(chat.createdAt, 'ru') }}</div></div>
+        <div class="chat-user medium-text">{{ chat.message ?? '...'}}
+
+        @if (chat.unreadMessages) {
+            <div class="unread-messages-chats">{{chat.unreadMessages}}</div>
+        }
+        </div>
+
+
+
 </div>
 
-}
+    }

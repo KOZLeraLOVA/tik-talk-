@@ -1,4 +1,10 @@
-import { Component, effect, inject, ViewChild } from '@angular/core'
+import {
+	ChangeDetectionStrategy,
+	Component,
+	effect,
+	inject,
+	ViewChild
+} from '@angular/core'
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms'
 import { firstValueFrom } from 'rxjs'
 import { AvatarUploadComponent } from '../../ui/avatar-upload/avatar-upload.component'
@@ -7,7 +13,8 @@ import {
 	AddressInputComponent,
 	StackInputComponent
 } from '../../../../../common-ui/src/lib/components'
-import { ProfileService } from '@tt/data-access'
+import { ProfileService, selectedMeProfile } from '@tt/data-access'
+import { Store } from '@ngrx/store'
 
 @Component({
 	selector: 'app-settings-page',
@@ -19,11 +26,14 @@ import { ProfileService } from '@tt/data-access'
 		AddressInputComponent
 	],
 	templateUrl: './settings-page.component.html',
-	styleUrl: './settings-page.component.scss'
+	styleUrl: './settings-page.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsPageComponent {
 	fb = inject(FormBuilder)
 	profileService = inject(ProfileService)
+	//store = inject(Store)
+	//me = this.store.selectSignal(selectedMeProfile)
 
 	@ViewChild(AvatarUploadComponent) avatarUploader!: AvatarUploadComponent
 

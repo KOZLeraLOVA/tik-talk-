@@ -1,14 +1,24 @@
-.tt-input {
-	width: 100%;
-	margin-top: 8px;
-	display: block;
-	border: 1px solid var(--light-color);
+:host {
+	position: relative;
+}
+
+.suggestions-dropdown {
+	position: absolute;
+	background: grey;
+	padding: 6px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.suggest-btn {
+	background: none;
+	border: none;
+	cursor: pointer;
 	border-radius: 4px;
-	padding: 12px 20px;
-	background: var(--dark-color);
-	font-weight: 400;
-	font-size: 14px;
-	line-height: 21px;
-	font-family: 'JetBrains Mono', sans-serif;
-	color: var(--light-color);
+
+	&:hover {
+		background: var(--primary-color);
+		color: black;
+	}
 }

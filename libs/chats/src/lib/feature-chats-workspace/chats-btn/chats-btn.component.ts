@@ -1,17 +1,15 @@
-import { Component, input } from '@angular/core'
+import { ChangeDetectionStrategy, Component, input } from '@angular/core'
 
-import {
-	LastMessageRes,
-	Message
-} from '../../../../../data-access/src/lib/chats/interfaces/chats.interface'
-import { AvatarCircleComponent } from '../../../../../common-ui/src/lib/components/avatar-circle/avatar-circle.component'
+import { LastMessageRes, Message } from '@tt/data-access'
+import { AvatarCircleComponent } from '@tt/common-ui'
 import { DateTime } from 'luxon'
 
 @Component({
 	selector: 'button[chats]',
 	imports: [AvatarCircleComponent],
 	templateUrl: './chats-btn.component.html',
-	styleUrl: './chats-btn.component.scss'
+	styleUrl: './chats-btn.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatsBtnComponent {
 	chat = input<LastMessageRes>()
@@ -52,9 +50,9 @@ export class ChatsBtnComponent {
 		const chatDate = date.startOf('day')
 
 		if (!chatDate.equals(today)) {
-			return this.formatShortTime(dateString, locale)
-		} else {
 			return this.formatFullDate(dateString, locale)
+		} else {
+			return this.formatShortTime(dateString, locale)
 		}
 	}
 }

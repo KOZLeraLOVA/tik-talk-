@@ -22,8 +22,23 @@ export const selectedMeProfile = createSelector(
 // 	(profileId: Profile | null) => profileId
 // )
 
+export const selectProfilePageble = createSelector(
+	profileFeature.selectProfileFeatureState,
+	(state) => {
+		return {
+			page: state.page,
+			size: state.size
+		}
+	}
+)
+
+export const selectProfileFilters = createSelector(
+	profileFeature.selectProfileFilters,
+	(filters) => filters
+)
+
 export const selectedSubscribersShortList = createSelector(
-	profileFeature.selectProfiles,
+	profileFeature.selectSubscribersShortList,
 	(subscribers) => {
 		return subscribers
 	}

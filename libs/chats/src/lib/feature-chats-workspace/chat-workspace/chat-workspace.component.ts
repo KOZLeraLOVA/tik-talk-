@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core'
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import { ChatWorkspaceHeaderComponent } from '../chat-workspace-header/chat-workspace-header.component'
 import { ActivatedRoute, Router } from '@angular/router'
-import { ChatsService } from '../../../../../data-access/src/lib/chats/services/chats.service'
+import { ChatsService } from '@tt/data-access'
 import { filter, of, switchMap } from 'rxjs'
 import { AsyncPipe } from '@angular/common'
 import { ChatWorkspaceMessagesWrapperComponent } from '../chat-workspace-messages-wrapper/chat-workspace-messages-wrapper.component'
@@ -14,7 +14,8 @@ import { ChatWorkspaceMessagesWrapperComponent } from '../chat-workspace-message
 		AsyncPipe
 	],
 	templateUrl: './chat-workspace.component.html',
-	styleUrl: './chat-workspace.component.scss'
+	styleUrl: './chat-workspace.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatWorkspaceComponent {
 	route = inject(ActivatedRoute)
@@ -22,7 +23,7 @@ export class ChatWorkspaceComponent {
 	chatsService = inject(ChatsService)
 	me = inject(ChatsService)
 
-	messages = this.chatsService.activeChatMessages
+	// messages = this.chatsService.activeChatMessages
 
 	activeChat$ = this.route.params.pipe(
 		switchMap(({ id }) => {

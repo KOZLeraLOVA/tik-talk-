@@ -1,4 +1,9 @@
-import { Component, inject, Input } from '@angular/core'
+import {
+	ChangeDetectionStrategy,
+	Component,
+	inject,
+	Input
+} from '@angular/core'
 import { ImgUrlPipe } from '../../../../../common-ui/src/lib/pipes/img-url.pipe'
 import { ActivatedRoute, Router } from '@angular/router'
 import { toObservable } from '@angular/core/rxjs-interop'
@@ -9,7 +14,8 @@ import { Profile } from '../../../../../data-access/src/lib/profile/interfaces/p
 	selector: 'app-profile-card',
 	imports: [ImgUrlPipe],
 	templateUrl: './profile-card.component.html',
-	styleUrl: './profile-card.component.scss'
+	styleUrl: './profile-card.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileCardComponent {
 	@Input() profile!: Profile

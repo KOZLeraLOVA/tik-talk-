@@ -10,9 +10,9 @@
 				<svg [icon]="menuItem.icon"></svg>
 				<span>{{ menuItem.label }}</span>
 
-<!--                @if (menuItem.label === 'Чаты' && unreadMessages()) {-->
-<!--                    <div class="unread-messages-chats">{{unreadMessages}}</div>-->
-<!--                }-->
+                @if (menuItem.label === 'Чаты' && unreadMessages()) {
+                    <div class="unread-messages-chats">{{unreadMessages}}</div>
+                }
 			</a>
 		</li>
 	</ul>
@@ -20,7 +20,7 @@
 
 <p class="medium-text mb20">Подписчики</p>
 
-@for (subscriber of subcribers$ | async; track subscriber.id) {
+@for (subscriber of subscribers();  track subscriber.id) {
 	<app-subscriber-card [profile]="subscriber"></app-subscriber-card>
 }
 

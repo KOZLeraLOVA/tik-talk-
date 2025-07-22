@@ -1,14 +1,20 @@
 import { DateTime } from 'luxon'
-import { Component, HostBinding, input } from '@angular/core'
+import {
+	ChangeDetectionStrategy,
+	Component,
+	HostBinding,
+	input
+} from '@angular/core'
 import { AvatarCircleComponent } from 'libs/common-ui/src/lib/components/avatar-circle/avatar-circle.component'
 import { TimeAgoPipe } from 'libs/common-ui/src/lib/pipes/time-ago.pipe'
-import { Message } from '../../../../../data-access/src/lib/chats/interfaces/chats.interface'
+import { Message } from '@tt/data-access'
 
 @Component({
 	selector: 'app-chat-workspace-message',
 	imports: [TimeAgoPipe, AvatarCircleComponent],
 	templateUrl: './chat-workspace-message.component.html',
-	styleUrl: './chat-workspace-message.component.scss'
+	styleUrl: './chat-workspace-message.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatWorkspaceMessageComponent {
 	message = input.required<Message>()

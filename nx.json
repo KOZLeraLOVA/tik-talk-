@@ -69,7 +69,8 @@
 		"@nx/angular:component": {
 			"style": "scss",
 			"skipTests": true,
-			"standalone": true
+			"standalone": true,
+			"changeDetection": "OnPush"
 		}
 	}
 }

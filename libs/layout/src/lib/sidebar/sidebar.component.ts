@@ -1,4 +1,9 @@
-import { Component, DestroyRef, inject } from '@angular/core'
+import {
+	ChangeDetectionStrategy,
+	Component,
+	DestroyRef,
+	inject
+} from '@angular/core'
 import { NgForOf, JsonPipe, AsyncPipe } from '@angular/common'
 import { RouterLink } from '@angular/router'
 import { firstValueFrom, Subscription } from 'rxjs'
@@ -10,7 +15,12 @@ import { ChatsService } from '../../../../data-access/src/lib/chats/services/cha
 import { Store } from '@ngrx/store'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 
-import { AuthService, ProfileService } from '@tt/data-access'
+import {
+	AuthService,
+	ProfileService,
+	selectedMeProfile,
+	selectedSubscribersShortList
+} from '@tt/data-access'
 import { isErrorMessage } from '../../../../data-access/src/lib/chats/interfaces/type-guards'
 import { Profile } from '../../../../data-access/src/lib/profile/interfaces/profile.interface'
 
@@ -28,7 +38,8 @@ import { Profile } from '../../../../data-access/src/lib/profile/interfaces/prof
 		RouterLinkActive
 	],
 	templateUrl: './sidebar.component.html',
-	styleUrl: './sidebar.component.scss'
+	styleUrl: './sidebar.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarComponent {
 	profileService = inject(ProfileService)
@@ -37,8 +48,9 @@ export class SidebarComponent {
 	destroyRef = inject(DestroyRef)
 	#authService = inject(AuthService)
 
-	subcribers$ = this.profileService.getSubscribersShortList()
-	//me = this.store.selectSignal(selectedMeProfile)
+	subscribers = this.store.selectSignal(selectedSubscribersShortList)
+	// subcribers$ = this.profileService.getSubscribersShortList()
+	// me = this.store.selectSignal(selectedMeProfile)
 	unreadMessages = this.chatService.unreadMessageCount
 	me: Profile | null = null
 

@@ -1,0 +1,15 @@
+
+<label class="tt-control-label mb16">
+    <ng-content></ng-content>
+
+    <div class="password-input">
+        <input
+                [value]="value"
+                (input)="onModelChange($event)"
+                class="tt-input"
+                [type]="type()"
+                [placeholder]="placeholder()"
+                (blur)="onTouched()"
+        />
+    </div>
+</label>

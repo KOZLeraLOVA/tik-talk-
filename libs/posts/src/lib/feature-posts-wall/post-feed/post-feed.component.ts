@@ -1,5 +1,6 @@
 import {
 	AfterViewInit,
+	ChangeDetectionStrategy,
 	Component,
 	ElementRef,
 	HostListener,
@@ -22,7 +23,8 @@ import { GlobalStoreService, selectedMeProfile } from '@tt/data-access'
 	standalone: true,
 	imports: [PostInputComponent, PostComponent],
 	templateUrl: './post-feed.component.html',
-	styleUrl: './post-feed.component.scss'
+	styleUrl: './post-feed.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostFeedComponent {
 	//profile!: Profile

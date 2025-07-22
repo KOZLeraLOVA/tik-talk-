@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	computed,
 	inject,
@@ -37,7 +38,8 @@ import { Profile } from '../../../../../data-access/src/lib/profile/interfaces/p
 		TimeAgoPipe
 	],
 	templateUrl: './post.component.html',
-	styleUrl: './post.component.scss'
+	styleUrl: './post.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostComponent implements OnInit {
 	post = input<Post>()

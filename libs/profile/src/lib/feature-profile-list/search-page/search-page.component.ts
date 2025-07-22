@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	ElementRef,
 	HostListener,
@@ -9,13 +10,19 @@ import { fromEvent } from 'rxjs'
 import { ProfileCardComponent } from '../../ui/profile-card/profile-card.component'
 import { ProfileFiltersComponent } from '../profile-filters/profile-filters.component'
 import { Store } from '@ngrx/store'
-import { selectFilteredProfiles } from '@tt/data-access'
+import { profileActions, selectFilteredProfiles } from '@tt/data-access'
+import { InfiniteScrollTriggerComponent } from '../../../../../common-ui/src/lib/components/ infinite-scroll-trigger/infinite-scroll-trigger.component'
 
 @Component({
 	selector: 'app-search-page',
-	imports: [ProfileCardComponent, ProfileFiltersComponent],
+	imports: [
+		ProfileCardComponent,
+		ProfileFiltersComponent,
+		InfiniteScrollTriggerComponent
+	],
 	templateUrl: './search-page.component.html',
-	styleUrl: './search-page.component.scss'
+	styleUrl: './search-page.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchPageComponent {
 	store = inject(Store)
@@ -23,6 +30,10 @@ export class SearchPageComponent {
 	profiles = this.store.selectSignal(selectFilteredProfiles)
 	hostElement = inject(ElementRef)
 	r2 = inject(Renderer2)
+
+	timeToFetch() {
+		this.store.dispatch(profileActions.setPage({}))
+	}
 
 	@HostListener('window:resize')
 	onWindowResize() {

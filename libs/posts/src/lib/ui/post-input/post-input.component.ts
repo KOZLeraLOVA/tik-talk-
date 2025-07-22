@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	EventEmitter,
 	HostBinding,
@@ -26,7 +27,8 @@ import { GlobalStoreService } from '../../../../../data-access/src/lib/shared/se
 	standalone: true,
 	imports: [AvatarCircleComponent, NgIf, SvgIconComponent, FormsModule],
 	templateUrl: './post-input.component.html',
-	styleUrl: './post-input.component.scss'
+	styleUrl: './post-input.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostInputComponent {
 	r2 = inject(Renderer2)

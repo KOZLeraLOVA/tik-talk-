@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core'
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms'
 import { debounceTime, startWith, Subscription } from 'rxjs'
 import { SvgIconComponent } from '../../../../../common-ui/src/lib/components/svg-icon/svg-icon.component'
@@ -10,7 +10,8 @@ import { profileActions, ProfileService } from '@tt/data-access'
 	selector: 'app-profile-filters',
 	imports: [ReactiveFormsModule, SvgIconComponent, AsyncPipe],
 	templateUrl: './profile-filters.component.html',
-	styleUrl: './profile-filters.component.scss'
+	styleUrl: './profile-filters.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileFiltersComponent {
 	fb = inject(FormBuilder)

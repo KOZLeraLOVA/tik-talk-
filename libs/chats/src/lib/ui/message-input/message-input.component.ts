@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	EventEmitter,
 	inject,
@@ -15,8 +16,10 @@ import { ProfileService } from '@tt/data-access'
 @Component({
 	selector: 'app-message-input',
 	imports: [NgIf, SvgIconComponent, FormsModule, AvatarCircleComponent],
+	standalone: true,
 	templateUrl: './message-input.component.html',
-	styleUrl: './message-input.component.scss'
+	styleUrl: './message-input.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessageInputComponent {
 	r2 = inject(Renderer2)

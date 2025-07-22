@@ -1,4 +1,5 @@
 import {
+	ChangeDetectionStrategy,
 	Component,
 	ElementRef,
 	EventEmitter,
@@ -12,18 +13,16 @@ import {
 } from '@angular/core'
 import { ChatWorkspaceMessageComponent } from '../chat-workspace-message/chat-workspace-message.component'
 import { firstValueFrom, fromEvent, Subscription, switchMap, timer } from 'rxjs'
-import {
-	Chat,
-	Message
-} from '../../../../../data-access/src/lib/chats/interfaces/chats.interface'
-import { ChatsService } from '../../../../../data-access/src/lib/chats/services/chats.service'
+import { Chat, Message } from '@tt/data-access'
+import { ChatsService } from '@tt/data-access'
 import { MessageInputComponent } from '../../ui/message-input/message-input.component'
 
 @Component({
 	selector: 'app-chat-workspace-messages-wrapper',
 	imports: [ChatWorkspaceMessageComponent, MessageInputComponent],
 	templateUrl: './chat-workspace-messages-wrapper.component.html',
-	styleUrl: './chat-workspace-messages-wrapper.component.scss'
+	styleUrl: './chat-workspace-messages-wrapper.component.scss',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatWorkspaceMessagesWrapperComponent {
 	chatsService = inject(ChatsService)
@@ -86,7 +85,7 @@ export class ChatWorkspaceMessagesWrapperComponent {
 		// 	this.chatsService.sendMessage(this.chat().id, messageText)
 		// )
 
-		//await firstValueFrom(this.chatsService.getChatById(this.chat().id))
+		await firstValueFrom(this.chatsService.getChatById(this.chat().id))
 		this.scrollToBottom()
 	}
 }
