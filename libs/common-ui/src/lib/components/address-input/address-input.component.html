@@ -8,7 +8,7 @@
 
         @for (suggest of suggestions; track suggest) {
             <button class="suggest-btn"
-            (click)="onSuggestionPick(suggest)">{{ suggest}}</button>
+                    (click)="onSuggestionPick(suggest)">{{ suggest.data.city}}</button>
         }
 
 </div>

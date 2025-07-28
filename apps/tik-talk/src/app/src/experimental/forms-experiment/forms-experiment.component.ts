@@ -1,4 +1,9 @@
-import { Component, inject, ViewEncapsulation } from '@angular/core'
+import {
+	ChangeDetectionStrategy,
+	Component,
+	inject,
+	ViewEncapsulation
+} from '@angular/core'
 import {
 	ReactiveFormsModule,
 	FormGroup,
@@ -13,10 +18,36 @@ import { CommonModule } from '@angular/common'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { Feature, MockService } from '../mock.service'
 import { NameValidator } from './name.validator'
+import {
+	AddressExperimentComponent,
+	StackExperimentComponent
+} from '../../../../../../../libs/common-ui/src'
 
 enum ReceiverType {
 	PERSON = 'PERSON',
 	LEGAL = 'LEGAL'
+}
+
+enum ModelBag {
+	Big = 'Big',
+	Standart = 'Standart',
+	Mini = 'Mini',
+	Small = 'Small'
+}
+
+enum MaterialBag {
+	Jeans = 'Jeans',
+	EcoSuede = 'EcoSuede'
+}
+
+enum ColorBag {
+	Yellow = 'Yellow',
+	Pink = 'Pink',
+	Blue = 'Blue',
+	Orange = 'Orange',
+	White = 'White',
+	Black = 'Black',
+	Green = 'Green'
 }
 
 interface Address {
@@ -31,7 +62,7 @@ function getAddressForm(initialValue: Address = {}) {
 		city: new FormControl<string>(initialValue.city ?? ''),
 		street: new FormControl<string>(initialValue.street ?? ''),
 		building: new FormControl<number | null>(initialValue.building ?? null),
-		apartment: new FormControl<number | null>(initialValue.apartment ?? null)
+		apartment: new FormControl<number | null>(null)
 	})
 }
 
@@ -74,13 +105,21 @@ function validateDateRange({
 @Component({
 	selector: 'app-forms-experiment',
 	standalone: true,
-	imports: [CommonModule, ReactiveFormsModule],
+	imports: [
+		CommonModule,
+		ReactiveFormsModule,
+		AddressExperimentComponent,
+		StackExperimentComponent
+	],
 	templateUrl: './forms-experiment.component.html',
 	styleUrl: './forms-experiment.component.scss',
 	encapsulation: ViewEncapsulation.None
 })
 export class FormsExperimentComponent {
 	ReceiverType = ReceiverType
+	ModelBag = ModelBag
+	MaterialBag = MaterialBag
+	ColorBag = ColorBag
 
 	mockService = inject(MockService)
 	nameValidator = inject(NameValidator)
@@ -97,6 +136,10 @@ export class FormsExperimentComponent {
 		lastName: new FormControl<string>(''),
 		addresses: new FormArray([getAddressForm()]),
 		feature: new FormRecord({}),
+		stack: new FormControl<string>(''),
+		model: new FormControl<ModelBag>(ModelBag.Big),
+		material: new FormControl<MaterialBag>(MaterialBag.Jeans),
+		color: new FormControl<ColorBag>(ColorBag.Yellow),
 		dateRange: new FormGroup(
 			{
 				from: new FormControl<string>(''),

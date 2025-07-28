@@ -1,3 +1,13 @@
-.password-input {
+.address-input {
 	position: relative;
+}
+
+.tt-input {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.input.ng-invalid.ng-touched {
+	border: 2px solid tomato;
 }

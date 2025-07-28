@@ -65,40 +65,44 @@
 
             <label class="tt-control-label mb16">
                 Модель сумки
-                <select class="input">
-                    <option >Спортивная сумка "Big" (55см x 25см x 25см)</option>
-                    <option >Спортивная сумка "Standart" (45см x 25см x 25см)</option>
-                    <option >Спортивная сумка "Mini" (35см x 25см x 25см)</option>
-                    <option >Спортивная сумка "Small" (30см x 25см x 25см)</option>
+                <select class="input" formControlName="model">
+                    <option [value]="ModelBag.Big">Спортивная сумка "Big" (55см x 25см x 25см)</option>
+                    <option [value]="ModelBag.Standart">Спортивная сумка "Standart" (45см x 25см x 25см)</option>
+                    <option [value]="ModelBag.Mini">Спортивная сумка "Mini" (35см x 25см x 25см)</option>
+                    <option [value]="ModelBag.Small">Спортивная сумка "Small" (30см x 25см x 25см)</option>
                 </select>
             </label>
+
 
             <div class="two-columns">
             <label class="tt-control-label mb16">
 Материал сумки
-                <select class="tt-input">
-                    <option >Джинса</option>
-                    <option >Эко замша</option>
+                <select class="tt-input" formControlName="material">
+                    <option [value]="MaterialBag.Jeans">Джинса</option>
+                    <option [value]="MaterialBag.EcoSuede">Эко замша</option>
                 </select>
             </label>
 
             <label class="tt-control-label mb16">
                 Цвет сумки
-                <select class="tt-input">
-                    <option >Желтый</option>
-                    <option >Розовый</option>
-                    <option >Голубой</option>
-                    <option >Оранжевый</option>
-                    <option >Белый</option>
-                    <option >Черный</option>
-                    <option >Зеленый</option>
+                <select class="tt-input" formControlName="color">
+                    <option  [value]="ColorBag.Yellow">Желтый</option>
+                    <option [value]="ColorBag.Pink">Розовый</option>
+                    <option [value]="ColorBag.Blue">Голубой</option>
+                    <option [value]="ColorBag.Orange">Оранжевый</option>
+                    <option [value]="ColorBag.White">Белый</option>
+                    <option [value]="ColorBag.Black">Черный</option>
+                    <option [value]="ColorBag.Green">Зеленый</option>
                 </select>
             </label>
             </div>
 
 
+
+            <tt-stack-experiment class="wrapper" formControlName="stack"></tt-stack-experiment>
+
 			<div style="display: flex; justify-content: space-around">
-				<h4 class="h6 mb16">Период доставки</h4>
+				<h4 class="h6 ">Период доставки</h4>
 			</div>
 			<div class="two-columns" formGroupName="dateRange">
 				<label class="tt-control-label mb16">
@@ -122,9 +126,9 @@
 
 			<div>
 				<div style="display: flex; justify-content: space-around">
-					<h4 class="h6 mb16">Адрес доставки</h4>
-					<button class="btn" style="width: 50px" (click)="addAddress()">
-						+
+					<h4 class=" h6 mb16">Адрес доставки</h4>
+					<button class="btn btn-shadow" style="width: 60px " (click)="addAddress()">
+                       +
 					</button>
 				</div>
 				@for (
@@ -132,43 +136,62 @@
 					track group;
 					let i = $index
 				) {
-					<div class="form-grid box" [formGroup]="group">
-						<label class="tt-control-label">
-							Город
-							<input
-								formControlName="city"
-								class="tt-input"
-								type="text"
-								placeholder="Город" />
-						</label>
+					<div class="form-grid box " [formGroup]="group">
+<tt-address-experiment  [formGroup]="group"></tt-address-experiment>
+                        @if (
+                            form.controls.name.touched && form.controls.name.hasError('nameValid')
+                                ) {
+                            <small>{{ form.controls.name.getError('nameValid')?.message }}</small>
+                        }
 
-						<label class="tt-control-label">
-							Улица
-							<input
-								formControlName="street"
-								class="tt-input"
-								type="text"
-								placeholder="Улица" />
-						</label>
+                        @if (
+                            form.controls.name.touched && form.controls.name.hasError('startsWith')
+                                ) {
+                            <small>{{ form.controls.name.getError('startsWith')?.message }}</small>
+                        }
 
-						<label class="tt-control-label">
-							Дом
-							<input
-								formControlName="building"
-								class="tt-input"
-								type="text"
-								placeholder="Дом" />
-						</label>
+                        @if (
+                            form.controls.name.touched && form.controls.name.hasError('required')
+                                ) {
+                            <small>Это поле обязательно!</small>
+                        }
 
-						<label class="tt-control-label">
-							Квартира
-							<input
-								formControlName="apartment"
-								class="tt-input"
-								type="text"
-								placeholder="Квартира" />
-						</label>
-						<button class="btn" (click)="deleteAddress(i)">Удалить</button>
+<!--						<label class="tt-control-label">-->
+<!--							Город-->
+<!--							<input-->
+<!--								formControlName="city"-->
+<!--								class="tt-input"-->
+<!--								type="text"-->
+<!--								placeholder="Город" />-->
+<!--						</label>-->
+
+<!--						<label class="tt-control-label">-->
+<!--							Улица-->
+<!--							<input-->
+<!--								formControlName="street"-->
+<!--								class="tt-input"-->
+<!--								type="text"-->
+<!--								placeholder="Улица" />-->
+<!--						</label>-->
+
+<!--						<label class="tt-control-label">-->
+<!--							Дом-->
+<!--							<input-->
+<!--								formControlName="building"-->
+<!--								class="tt-input"-->
+<!--								type="text"-->
+<!--								placeholder="Дом" />-->
+<!--						</label>-->
+
+<!--						<label class="tt-control-label">-->
+<!--							Квартира-->
+<!--							<input-->
+<!--								formControlName="apartment"-->
+<!--								class="tt-input"-->
+<!--								type="text"-->
+<!--								placeholder="Квартира" />-->
+<!--						</label>-->
+						<button class="btn btn-shadow mt20" (click)="deleteAddress(i)">Удалить</button>
 					</div>
 				}
 			</div>

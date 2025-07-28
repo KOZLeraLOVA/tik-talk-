@@ -30,3 +30,37 @@
 
 .profile-input {
 }
+
+.to-setting-btn {
+	width: 190px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	text-decoration: none;
+}
+
+.tt-input {
+	width: 60%;
+	margin-top: 2px;
+	display: block;
+	border: 1px solid var(--light-color);
+	border-radius: 4px;
+	padding: 12px 20px;
+	background: var(--dark-color);
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 20px;
+	font-family: 'JetBrains Mono', sans-serif;
+	color: var(--light-color);
+	position: relative;
+}
+
+.wrapper-container {
+	display: flex;
+	justify-content: space-around;
+}
+
+.wrapper {
+	display: flex;
+	justify-content: space-evenly;
+}

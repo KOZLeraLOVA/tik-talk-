@@ -21,8 +21,15 @@ import {
 	selectedMeProfile,
 	selectedSubscribersShortList
 } from '@tt/data-access'
-import { isErrorMessage } from '../../../../data-access/src/lib/chats/interfaces/type-guards'
+import {
+	isErrorMessage,
+	isUnreadMessage
+} from '../../../../data-access/src/lib/chats/interfaces/type-guards'
 import { Profile } from '../../../../data-access/src/lib/profile/interfaces/profile.interface'
+import {
+	ChatWSMessage,
+	ChatWSUnreadMessage
+} from '../../../../data-access/src/lib/chats/interfaces/chat-ws-message.interface'
 
 @Component({
 	selector: 'app-sidebar',
@@ -51,7 +58,7 @@ export class SidebarComponent {
 	subscribers = this.store.selectSignal(selectedSubscribersShortList)
 	// subcribers$ = this.profileService.getSubscribersShortList()
 	// me = this.store.selectSignal(selectedMeProfile)
-	unreadMessages = this.chatService.unreadMessageCount
+	readonly unreadMessages = this.chatService.unreadMessageCount
 	me: Profile | null = null
 
 	wsSubscribe!: Subscription
@@ -92,6 +99,11 @@ export class SidebarComponent {
 			})
 	}
 
+	// handleChatWSMessage = (message: ChatWSMessage) => {
+	// 	if (isUnreadMessage(message)) {
+	// 		this.unreadMessages = message.data.count
+	// 	}
+	// }
 	ngOnInit() {
 		firstValueFrom(this.profileService.getMe()).then((profile) => {
 			this.me = profile

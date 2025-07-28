@@ -21,7 +21,7 @@ body {
 }
 .btn {
 	width: 100%;
-	width: 430px;
+	width: 445px;
 	border: none;
 	background: var(--primary-color);
 	color: var(--dark-color);
@@ -61,6 +61,7 @@ body {
 }
 
 .h6 {
+	padding-top: 10px;
 	font-size: 18px;
 	font-weight: 800;
 	line-height: 24px;
@@ -73,7 +74,6 @@ body {
 	font-size: 12px;
 	line-height: 16px;
 	display: grid;
-	justify-content: center;
 	margin: 5px;
 }
 
@@ -102,20 +102,16 @@ body {
 }
 
 .box {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+	display: grid;
+	flex-direction: column;
 	width: 500px;
 	padding: 0;
-	justify-content: space-evenly;
 }
 
 .input {
 	display: grid;
 	width: 100%;
-
 	margin-top: 8px;
-
 	border: 1px solid var(--light-color);
 	border-radius: 4px;
 	padding: 12px 20px;
@@ -125,7 +121,7 @@ body {
 	line-height: 21px;
 	font-family: 'JetBrains Mono', sans-serif;
 	color: var(--light-color);
-	width: 430px;
+	width: 450px;
 }
 
 .input.ng-invalid.ng-touched {
@@ -149,7 +145,7 @@ body {
 	margin-top: 12px;
 	margin-bottom: 12px;
 	grid-template-columns: 1fr 1fr;
-	grid-gap: 12px;
+	grid-gap: 40px;
 }
 
 .tt-input::-webkit-calendar-picker-indicator {
@@ -159,4 +155,17 @@ body {
 
 .tt-input.ng-pending {
 	border: 2px dashed var(--primary-color);
+}
+
+.wrapper {
+	display: grid;
+	justify-items: center;
+}
+
+.stroka-input {
+	width: 430px;
+}
+
+.wrapper-input {
+	display: flex;
 }

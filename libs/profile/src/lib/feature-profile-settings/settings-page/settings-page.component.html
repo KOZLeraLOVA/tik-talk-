@@ -31,7 +31,14 @@
 			<app-avatar-upload></app-avatar-upload>
 		</label>
 
-
+<div class="wrapper">
+    <input type="text"
+           placeholder="у тебя есть любимое дело?"
+           class="tt-input" formControlName="job" />
+    <button class="btn to-setting-btn" [routerLink]="['/experiment']">
+        Создать свою сумку
+    </button>
+</div>
         <tt-stack-input formControlName="stack"></tt-stack-input>
         <tt-address-input formControlName="city"></tt-address-input>
 	</div>

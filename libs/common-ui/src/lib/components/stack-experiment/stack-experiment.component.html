@@ -1,10 +1,12 @@
-<div class="stack-control">
+<h3>Особые пожелания</h3>
+<small>(ремешок, мешок для обуви, молния широкая/узкая)</small>
+<div class="stack-control mt20">
     @for (tech of value$ | async; track tech; let i = $index) {
     <div class="skill-tag stack-tag">
         <button
                 type="button"
                 (click)="onTagDelete(i)"
-                class="stack-btn__delete svg16"
+                class="stack-btn__delete svg16  "
         >
             <svg icon="cross" class="icon-cross svg10"></svg>
         </button>
@@ -15,6 +17,6 @@
             [(ngModel)]="innerInput"
             type="text"
             class="stack-ghost-input"
-            placeholder="введите stack">
+            placeholder="Пример: мешок(цвет) *нажмите enter* и т.д.">
 </div>
 

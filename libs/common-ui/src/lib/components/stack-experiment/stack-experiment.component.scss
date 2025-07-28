@@ -1,0 +1,62 @@
+.stack-control {
+	width: 455px;
+	display: flex;
+	flex-wrap: wrap;
+	border: 1px solid var(--light-color);
+	border-radius: 4px;
+	background: var(--dark-color);
+	padding: 12px 0;
+	gap: 12px;
+}
+
+.stack-tag {
+	display: inline-flex;
+	gap: 4px;
+	align-items: center;
+}
+
+.stack-btn__delete {
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.icon-cross {
+	background: none;
+	border: none;
+}
+
+.stack-ghost-input {
+	width: 100%;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 21px;
+	font-family: 'JetBrains Mono', sans-serif;
+	color: var(--light-color);
+	border: none;
+	background: none;
+	outline: none;
+}
+
+:host.disabled {
+	.stack-control {
+		pointer-events: none;
+		opacity: 0.5;
+	}
+}
+
+.btn-shadow {
+	position: relative;
+
+	&:before {
+		content: '';
+		position: absolute;
+		z-index: -1;
+		bottom: -4px;
+		right: -4px;
+		background: var(--gray-color);
+		width: 100%;
+		height: 100%;
+		border-radius: 4px;
+	}
+}

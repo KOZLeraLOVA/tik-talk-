@@ -9,4 +9,5 @@ export interface Profile {
 	isActive: boolean
 	stack: string[]
 	city: string
+	job: string
 }

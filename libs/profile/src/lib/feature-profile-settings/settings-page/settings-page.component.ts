@@ -15,6 +15,7 @@ import {
 } from '../../../../../common-ui/src/lib/components'
 import { ProfileService, selectedMeProfile } from '@tt/data-access'
 import { Store } from '@ngrx/store'
+import { ActivatedRoute, Router, RouterLink } from '@angular/router'
 
 @Component({
 	selector: 'app-settings-page',
@@ -23,7 +24,8 @@ import { Store } from '@ngrx/store'
 		ReactiveFormsModule,
 		AvatarUploadComponent,
 		StackInputComponent,
-		AddressInputComponent
+		AddressInputComponent,
+		RouterLink
 	],
 	templateUrl: './settings-page.component.html',
 	styleUrl: './settings-page.component.scss',
@@ -35,6 +37,9 @@ export class SettingsPageComponent {
 	//store = inject(Store)
 	//me = this.store.selectSignal(selectedMeProfile)
 
+	route = inject(ActivatedRoute)
+	router = inject(Router)
+
 	@ViewChild(AvatarUploadComponent) avatarUploader!: AvatarUploadComponent
 
 	form = this.fb.group({
@@ -43,7 +48,8 @@ export class SettingsPageComponent {
 		username: [{ value: '', disabled: true }, Validators.required],
 		description: [''],
 		stack: [''],
-		city: [null]
+		city: [null],
+		job: ['']
 	})
 
 	constructor() {

@@ -10,8 +10,8 @@
 				<svg [icon]="menuItem.icon"></svg>
 				<span>{{ menuItem.label }}</span>
 
-                @if (menuItem.label === 'Чаты' && unreadMessages()) {
-                    <div class="unread-messages-chats">{{unreadMessages}}</div>
+                @if (menuItem.label === 'Чаты' && unreadMessages() > 0) {
+                    <div class="unread-messages-chats">{{unreadMessages() }}</div>
                 }
 			</a>
 		</li>

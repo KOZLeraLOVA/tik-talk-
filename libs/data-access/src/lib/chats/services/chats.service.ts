@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http'
-import { inject, Injectable, signal } from '@angular/core'
+import { computed, inject, Injectable, signal } from '@angular/core'
 import { Chat, LastMessageRes, Message } from '../interfaces/chats.interface'
 import { map, Observable } from 'rxjs'
 import { DateTime } from 'luxon'
@@ -40,11 +40,21 @@ export class ChatsService {
 	unreadMessageCount = signal<number>(0)
 	userConsumer = signal<Profile | null>(null)
 
-	countUnreadMessagesOneUser = signal(new Map<number, number>())
+	countUnreadMessagesOneUser = signal<Map<number, number>>(new Map())
 
 	baseApiUrl = '/yt-course/'
 	chatsUrl = `${this.baseApiUrl}chat/`
 	messageUrl = `${this.baseApiUrl}message/`
+
+	readonly unreadUsersCount = computed(() => {
+		const map = this.countUnreadMessagesOneUser()
+		let count = 0
+
+		map.forEach((value) => {
+			if (value > 0) count++
+		})
+		return count
+	})
 
 	connectWS() {
 		return this.wsAdapter.connect({

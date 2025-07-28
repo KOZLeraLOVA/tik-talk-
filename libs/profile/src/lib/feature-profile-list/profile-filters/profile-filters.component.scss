@@ -1,10 +1,13 @@
 .profile-search-form {
 	padding: 16px 40px;
+	justify-content: space-between;
 	background: var(--dark-color);
 	border: 1px solid var(--light-color);
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(100px, 160px));
-	grid-gap: 30px;
+	display: flex;
+	gap: 30px;
+	align-content: stretch;
+	justify-content: space-between;
+	align-items: flex-end;
 }
 
 .tt-form-label {
@@ -35,6 +38,17 @@
 .wrapper {
 	display: grid;
 	justify-content: center;
+}
+
+.svg-container {
+	display: flex;
+	flex-shrink: 0;
+	margin-left: 20px;
+	width: 50px;
+	height: 50px;
+	background: var(--primary-color);
+	justify-content: center;
+	align-items: center;
 }
 
 .wrapper-filter {
