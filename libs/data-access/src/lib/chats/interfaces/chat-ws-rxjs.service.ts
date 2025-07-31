@@ -39,6 +39,7 @@ export class ChatWSRxjsService implements ChatWSService {
 			chat_id: chatId
 		})
 	}
+
 	#handleSocketClose(params: ChatConnectionWSParams): void {
 		this.#authService.refreshAuthToken()
 

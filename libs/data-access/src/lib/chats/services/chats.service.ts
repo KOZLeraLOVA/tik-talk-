@@ -27,14 +27,14 @@ export class ChatsService {
 	#authService = inject(AuthService)
 	me = inject(ProfileService).me
 
-	wsAdapter: ChatWSService = new ChatWSNativeService()
-	// wsAdapter: ChatWSService = new ChatWSRxjsService()
+	// wsAdapter: ChatWSService = new ChatWSNativeService()
+	wsAdapter: ChatWSService = new ChatWSRxjsService()
 
 	groupedChatMessages = signal<{ label: string; messages: Message[] }[]>([])
 	////groupedUnreadChatMessages = signal<{ label: string; messages: Message[] }[]>([])
 	//unreadMessageCount = signal(0)
 
-	// me = this.store.selectSignal(selectedMeProfile)
+	//me = this.store.selectSignal(selectedMeProfile)
 	activeChatMessages = signal<Message[]>([])
 
 	unreadMessageCount = signal<number>(0)
@@ -42,9 +42,11 @@ export class ChatsService {
 
 	countUnreadMessagesOneUser = signal<Map<number, number>>(new Map())
 
-	baseApiUrl = '/yt-course/'
-	chatsUrl = `${this.baseApiUrl}chat/`
-	messageUrl = `${this.baseApiUrl}message/`
+	chatsUrl = 'https://icherniakov.ru/yt-course/chat/'
+
+	// baseApiUrl = '/yt-course/'
+	// chatsUrl = `${this.baseApiUrl}chat/`
+	// messageUrl = `${this.baseApiUrl}message/`
 
 	readonly unreadUsersCount = computed(() => {
 		const map = this.countUnreadMessagesOneUser()
@@ -58,7 +60,7 @@ export class ChatsService {
 
 	connectWS() {
 		return this.wsAdapter.connect({
-			url: `${this.baseApiUrl}chat/ws`,
+			url: `${this.chatsUrl}ws`,
 			token: this.#authService.token ?? '',
 			handleMessage: this.handleWSMessage
 		}) as Observable<ChatWSMessage>
@@ -126,6 +128,7 @@ export class ChatsService {
 				console.log('Токен обновлен', tokenResponce.access_token)
 			})
 	}
+
 	createChat(userId: number) {
 		return this.http.post<Chat>(`${this.chatsUrl}${userId}`, {})
 	}
@@ -135,10 +138,8 @@ export class ChatsService {
 	}
 
 	getChatById(chatId: number) {
-		console.log(chatId)
 		return this.http.get<Chat>(`${this.chatsUrl}${chatId}`).pipe(
 			map((chat) => {
-				console.log(chat)
 				const patchedMessages = chat.messages.map((message) => {
 					this.userConsumer.set(
 						chat.userFirst.id === this.me()!.id
@@ -155,8 +156,6 @@ export class ChatsService {
 						isMine: message.userFromId === this.me()!.id
 					}
 				})
-
-				//todo
 
 				const groupedMessage = this.messagesForGroup(patchedMessages)
 				this.groupedChatMessages.set(groupedMessage)
@@ -220,23 +219,24 @@ export class ChatsService {
 			messages
 		}))
 	}
-
-	sendMessage(chatId: number, message: string) {
-		return this.http
-			.post(
-				`${this.messageUrl}send/${chatId}`,
-				{},
-				{
-					params: { message }
-				}
-			)
-			.pipe(
-				map((response: any) => {
-					return {
-						text: response.text,
-						timestamp: new Date(response.timestamp)
-					}
-				})
-			)
-	}
 }
+//
+// sendMessage(chatId: number, message: string) {
+// 	return this.http
+// 		.post(
+// 			`${this.messageUrl}send/${chatId}`,
+// 			{},
+// 			{
+// 				params: { message }
+// 			}
+// 		)
+// 		.pipe(
+// 			map((response: any) => {
+// 				return {
+// 					text: response.text,
+// 					timestamp: new Date(response.timestamp)
+// 				}
+// 			})
+// 		)
+// 	}
+// }

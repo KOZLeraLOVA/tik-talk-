@@ -15,12 +15,14 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 	styleUrl: './chats.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChatsPageComponent implements OnInit {
+export class ChatsPageComponent {
 	#chatService = inject(ChatsService)
-	ngOnInit() {
-		this.#chatService.connectWS()
+
+	constructor() {
+		this.#chatService.connectWS().pipe(takeUntilDestroyed()).subscribe()
 	}
-	// constructor() {
-	// 	this.#chatService.connectWS().pipe(takeUntilDestroyed()).subscribe()
+
+	// ngOnInit() {
+	// 	this.#chatService.connectWS()
 	// }
 }
