@@ -1,0 +1,9 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = true
+	symlinks = false
+	ignorecase = true
+[remote "origin"]
+	url = https://gitlab.icherniakov.ru/KOZ_lera_LOVA/tik-tolk.git
+	fetch = +refs/heads/*:refs/remotes/origin/*

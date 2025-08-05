@@ -3,8 +3,8 @@ import { webSocket } from 'rxjs/webSocket'
 import {
 	ChatConnectionWSParams,
 	ChatWSService
-} from './chat-ws-service.interface'
-import { ChatWSMessage } from './chat-ws-message.interface'
+} from '../interfaces/chat-ws-service.interface'
+import { ChatWSMessage } from '../interfaces/chat-ws-message.interface'
 import { finalize, Observable, tap } from 'rxjs'
 import { inject } from '@angular/core'
 import { AuthService } from '@tt/data-access'

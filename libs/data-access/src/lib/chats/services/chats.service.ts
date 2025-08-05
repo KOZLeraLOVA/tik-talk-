@@ -11,7 +11,7 @@ import {
 	isNewMessage,
 	isErrorMessage
 } from '../interfaces/type-guards'
-import { ChatWSRxjsService } from '../interfaces/chat-ws-rxjs.service'
+import { ChatWSRxjsService } from '../services/chat-ws-rxjs.service'
 import { TokenResponce } from '../../auth/interfaces/auth.interface'
 
 import { Store } from '@ngrx/store'
